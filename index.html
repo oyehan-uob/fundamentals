@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    
+</script>
+<body>
+    <h1>Photos of some notable nobel prize winners</h1>
+
+<p>Users story: Users should be able to click to check the photos. Users should able to see laurates' names. Users should be able to comment on the photos</p>
+
+<button id="prev">Previous</button>
+<button id="next">Next</button>
+
+<h2 id="desc"></h2>
+<img id="img" height="500px" width="650px"></img>
+
+<p>Do you have any question or comment?</p>
+<ul id="list"></ul>
+<input id="text" /> <button id="comment">Post comment</button>
+
+
+<script>
+var photos, comment, names;
+
+function convertToNumber(value) {
+  // Convert a string value to a number if possible
+  let number_value = Number(value);
+  if (Number.isNaN(number_value)) {
+    return 0
+  } else {
+    return number_value
+  }
+}
+
+
+photos = ['https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/800px-Albert_Einstein_Head.jpg', 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcTsX374AK0DB0kuUnCTmYOPlOz2_dEuQ__nQcFmJOCA9-CmXpPNnDJguSyKr-NRB4Zh', 'http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSZUo2UbejAWwxFUx8i2jJnVIFXmkb-Rnf4DpIa2Nxw53JFzLv5fPXxVTKKp2QwlWmM', 'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQGJhznkEyPUWocu8qPTn3sBsOnrbL5nNk6vJ1UwWvOpFVpCWirM6g8KNmjREVX2QiaNbvSOvt3ypKhIdg', 'https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcR28HF6IvZgXnygxX79VjQFfOeJ0peNsS7FbmUwbIo9RuuaK57pL04GXTpZPkkwWCaLlproNgqlW43FnjM'];
+names = ['Albert Eistein', 'Neil Bohr', 'JJ Thompson', 'Frances H. Arnold', 'Wole Soyinka'];
+comment = [];
+
+
+document.getElementById('prev').addEventListener('click', (event) => {
+  let element_img = document.getElementById('img');
+  photos.push(photos[0]);
+  element_img.setAttribute("src", photos.shift());
+  let element_desc = document.getElementById('desc');
+  names.push(names[0]);
+  element_desc.innerText = names.shift();
+
+});
+
+document.getElementById('next').addEventListener('click', (event) => {
+  let element_img2 = document.getElementById('img');
+  photos.unshift(photos.slice(-1)[0]);
+  element_img2.setAttribute("src", photos.pop());
+  let element_desc2 = document.getElementById('desc');
+  names.unshift(names.slice(-1)[0]);
+  element_desc2.innerText = names.pop();
+
+});
+
+document.getElementById('comment').addEventListener('click', (event) => {
+  comment.unshift(document.getElementById('text').value);
+  let element_list = document.getElementById('list');
+  let new_li = document.createElement('li');
+  new_li.innerText = document.getElementById('text').value;
+
+  element_list.appendChild(new_li);
+
+});
+</script>
+
+</body>
+</html>
